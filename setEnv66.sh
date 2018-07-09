@@ -1,0 +1,1 @@
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/data0/qilei_chen/boost_1_61_0/install/lib:/data0/qilei_chen/leveldb-1.18:/data0/qilei_chen/cudnn8_5_1/lib64:/data0/qilei_chen/opencv33_install_66/lib:/data0/qilei_chen/nccl/build/lib
