@@ -12,6 +12,7 @@ from utils.cython_bbox import bbox_overlaps
 import numpy as np
 import scipy.sparse
 from fast_rcnn.config import cfg
+import cv2
 
 class imdb(object):
     """Image database."""
@@ -96,12 +97,30 @@ class imdb(object):
         raise NotImplementedError
 
     def _get_widths(self):
-      return [PIL.Image.open(self.image_path_at(i)).size[0]
-              for i in xrange(self.num_images)]
+      widths = []
+      width_file_name = 'widths.txt'
+      if os.path.exists(width_file_name):
+          fwids = open(width_file_name)
+          line = fwids.readline()
+          while line:
+              widths.append(int(line))
+              line = fwids.readline()
+      else:
+		  fwids = open(width_file_name,'wb')
+		  for i in xrange(self.num_images):
+			  widths.append(PIL.Image.open(self.image_path_at(i)).size[0])
+			  if(widths[i]==0):
+				  print(self.image_path_at(i))
+			  fwids.write(str(widths[i])+'\n')
+		  fwids.close()
+      return widths
+      #return [PIL.Image.open(self.image_path_at(i)).size[0]
+      #        for i in xrange(self.num_images)]
 
     def append_flipped_images(self):
         num_images = self.num_images
         widths = self._get_widths()
+        print('num_images:'+str(num_images))
         for i in xrange(num_images):
             boxes = self.roidb[i]['boxes'].copy()
             oldx1 = boxes[:, 0].copy()

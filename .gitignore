@@ -5,3 +5,5 @@ faster_rcnn_model*
 *.so
 *.pkl
 *.txt
+./lib/datasets/*.pyc
+data
