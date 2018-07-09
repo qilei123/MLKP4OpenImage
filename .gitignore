@@ -1,0 +1,7 @@
+*.pyc
+caffe-mlkp
+output
+faster_rcnn_model*
+*.so
+*.pkl
+*.txt
