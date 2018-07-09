@@ -54,7 +54,7 @@ def prepare_roidb(imdb):
     if os.path.exists(roidb_file_name):
 		with open(roidb_file_name,'rb') as fid:
 			roidb = cPickle.load(fid)
-        print roidb[0]['max_overlaps']	
+		print roidb[0]['max_overlaps']
     else:
 		for i in xrange(len(imdb.image_index)):
 			roidb[i]['image'] = imdb.image_path_at(i)
