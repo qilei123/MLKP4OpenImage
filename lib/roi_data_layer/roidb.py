@@ -51,31 +51,31 @@ def prepare_roidb(imdb):
     
     roidb = imdb.roidb
     roidb_file_name = 'Roidb.pkl'
-    if os.path.exists(roidb_file_name):
+    #if os.path.exists(roidb_file_name):
 		#with open(roidb_file_name,'rb') as fid:
 		#	roidb = cPickle.load(fid)
-		print imdb.roidb[0]['max_overlaps']
-    else:
-		for i in xrange(len(imdb.image_index)):
-			roidb[i]['image'] = imdb.image_path_at(i)
-			roidb[i]['width'] = sizes[i][0]
-			roidb[i]['height'] = sizes[i][1]
-			# need gt_overlaps as a dense array for argmax
-			gt_overlaps = roidb[i]['gt_overlaps'].toarray()
-			# max overlap with gt over classes (columns)
-			max_overlaps = gt_overlaps.max(axis=1)
-			# gt class that had the max overlap
-			max_classes = gt_overlaps.argmax(axis=1)
-			roidb[i]['max_classes'] = max_classes
-			roidb[i]['max_overlaps'] = max_overlaps
-			# sanity checks
-			# max overlap of 0 => class should be zero (background)
-			zero_inds = np.where(max_overlaps == 0)[0]
-			assert all(max_classes[zero_inds] == 0)
-			# max overlap > 0 => class should not be zero (must be a fg class)
-			nonzero_inds = np.where(max_overlaps > 0)[0]
-			assert all(max_classes[nonzero_inds] != 0)
-		with open(roidb_file_name, 'wb') as fid:
+	#	print imdb.roidb[0]['max_overlaps']
+    #else:
+    for i in xrange(len(imdb.image_index)):
+        roidb[i]['image'] = imdb.image_path_at(i)
+        roidb[i]['width'] = sizes[i][0]
+        roidb[i]['height'] = sizes[i][1]
+        # need gt_overlaps as a dense array for argmax
+        gt_overlaps = roidb[i]['gt_overlaps'].toarray()
+        # max overlap with gt over classes (columns)
+        max_overlaps = gt_overlaps.max(axis=1)
+        # gt class that had the max overlap
+        max_classes = gt_overlaps.argmax(axis=1)
+        roidb[i]['max_classes'] = max_classes
+        roidb[i]['max_overlaps'] = max_overlaps
+        # sanity checks
+        # max overlap of 0 => class should be zero (background)
+        zero_inds = np.where(max_overlaps == 0)[0]
+        assert all(max_classes[zero_inds] == 0)
+        # max overlap > 0 => class should not be zero (must be a fg class)
+        nonzero_inds = np.where(max_overlaps > 0)[0]
+        assert all(max_classes[nonzero_inds] != 0)
+        with open(roidb_file_name, 'wb') as fid:
 			cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)			
 
 
@@ -95,8 +95,8 @@ def add_bbox_regression_targets(roidb):
         max_classes = roidb[im_i]['max_classes']
         roidb[im_i]['bbox_targets'] = \
             _compute_targets(rois, max_overlaps, max_classes)
-
-    if not cfg.TRAIN.BBOX_NORMALIZE_TARGETS_PRECOMPUTED:
+    
+    if cfg.TRAIN.BBOX_NORMALIZE_TARGETS_PRECOMPUTED:
         # Use fixed / precomputed "means" and "stds" instead of empirical values
         means = np.tile(
             np.array(cfg.TRAIN.BBOX_NORMALIZE_MEANS), (num_reg_classes, 1))
