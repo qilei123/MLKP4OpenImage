@@ -48,7 +48,7 @@ def prepare_roidb(imdb):
 			sizefile.write(str(isize[0])+'\n')
 			sizefile.write(str(isize[1])+'\n')
         sizefile.close()
-    
+    print("sizes loaded")
     roidb = imdb.roidb
     roidb_file_name = 'Roidb.pkl'
     #if os.path.exists(roidb_file_name):

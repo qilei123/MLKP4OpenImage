@@ -17,6 +17,8 @@ import argparse
 import pprint
 import numpy as np
 import sys
+import os
+import cPickle
 
 def parse_args():
     """
@@ -97,11 +99,25 @@ if __name__ == '__main__':
         #caffe.set_random_seed(cfg.RNG_SEED)
 
     # set up caffe
-
-    imdb, roidb = combined_roidb(args.imdb_name)
+    fbroidb = 'fbroidb.pkl'
+    fbimdb = 'fbimdb.pkl'
+    if os.path.exists(fbroidb):
+		with open(fbroidb,'rb') as fid:
+			roidb = cPickle.load(fid)
+		with open(fbimdb,'rb') as fid:
+			imdb = cPickle.load(fid)
+		output_dir = get_output_dir(imdb)
+    else:
+        imdb, roidb = combined_roidb(args.imdb_name)
+        output_dir = get_output_dir(imdb)
+        with open(fbimdb, 'wb') as fid:
+		    cPickle.dump(imdb, fid, cPickle.HIGHEST_PROTOCOL)        
+        with open(fbroidb, 'wb') as fid:
+		    cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)
+        
     print '{:d} roidb entries'.format(len(roidb))
-
-    output_dir = get_output_dir(imdb)
+    
+    
     print 'Output will be saved to `{:s}`'.format(output_dir)
 
     train_net_multi_gpu(args.solver, roidb, output_dir,
