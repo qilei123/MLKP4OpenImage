@@ -39,10 +39,12 @@ class SolverWrapper(object):
             # fixed statistics to compute a priori
             assert cfg.TRAIN.BBOX_NORMALIZE_TARGETS_PRECOMPUTED
 
+
         if cfg.TRAIN.BBOX_REG:
             print 'Computing bounding-box regression targets...'
             self.bbox_means, self.bbox_stds = \
                     rdl_roidb.add_bbox_regression_targets(roidb)
+
             print 'done'
 
         self.solver = caffe.SGDSolver(solver_prototxt)
@@ -287,8 +289,8 @@ def filter_roidb(roidb):
 def train_net(solver_prototxt, roidb, output_dir,
               pretrained_model=None, max_iters=40000):
     """Train a Fast R-CNN network."""
-
-    roidb = filter_roidb(roidb)
+    if not os.path.exits('normalizedRoidb.pkl'):
+        roidb = filter_roidb(roidb)
     sw = SolverWrapper(solver_prototxt, roidb, output_dir,
                        pretrained_model=pretrained_model)
 
