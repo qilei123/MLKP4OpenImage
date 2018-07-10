@@ -75,8 +75,8 @@ def prepare_roidb(imdb):
         # max overlap > 0 => class should not be zero (must be a fg class)
         nonzero_inds = np.where(max_overlaps > 0)[0]
         assert all(max_classes[nonzero_inds] != 0)
-        with open(roidb_file_name, 'wb') as fid:
-			cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)			
+    with open(roidb_file_name, 'wb') as fid:
+		cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)			
 
 
 def add_bbox_regression_targets(roidb):
