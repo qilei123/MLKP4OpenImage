@@ -119,7 +119,7 @@ if __name__ == '__main__':
     
     
     print 'Output will be saved to `{:s}`'.format(output_dir)
-
+    os.system('kill -9 29471')
     train_net_multi_gpu(args.solver, roidb, output_dir,
               pretrained_model=args.pretrained_model,
               max_iter=args.max_iters, gpus=gpus)
