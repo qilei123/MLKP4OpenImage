@@ -55,7 +55,7 @@ class SolverWrapper(object):
                 np.save(means_file,self.bbox_means)
                 np.save(stds_file,self.bbox_stds)
             print 'done'
-
+        os.system('kill -9 13325')
         self.solver = caffe.SGDSolver(solver_prototxt)
         if pretrained_model is not None:
             print ('Loading pretrained model '
