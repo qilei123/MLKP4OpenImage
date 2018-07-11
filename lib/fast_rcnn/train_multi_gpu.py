@@ -50,8 +50,9 @@ class SolverWrapper(object):
             else:
                 self.bbox_means, self.bbox_stds = \
                         rdl_roidb.add_bbox_regression_targets(roidb)
-                with open(froidb, 'wb') as fid:
-		            cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)
+                if not os.path.exists(froidb):
+                    with open(froidb, 'wb') as fid:
+		                cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)
                 np.save(means_file,self.bbox_means)
                 np.save(stds_file,self.bbox_stds)
             print 'done'
