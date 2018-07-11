@@ -104,14 +104,14 @@ if __name__ == '__main__':
     if os.path.exists(fbroidb):
 		with open(fbroidb,'rb') as fid:
 			roidb = cPickle.load(fid)
-		with open(fbimdb,'rb') as fid:
-			imdb = cPickle.load(fid)
-		output_dir = get_output_dir(imdb)
+		#with open(fbimdb,'rb') as fid:
+		#	imdb = cPickle.load(fid)
+		output_dir = './output/faster_rcnn_end2end/voc_2007_trainval'#get_output_dir(imdb)
     else:
         imdb, roidb = combined_roidb(args.imdb_name)
         output_dir = get_output_dir(imdb)
-        with open(fbimdb, 'wb') as fid:
-		    cPickle.dump(imdb, fid, cPickle.HIGHEST_PROTOCOL)        
+        #with open(fbimdb, 'wb') as fid:
+		#    cPickle.dump(imdb, fid, cPickle.HIGHEST_PROTOCOL)        
         with open(fbroidb, 'wb') as fid:
 		    cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)
         
