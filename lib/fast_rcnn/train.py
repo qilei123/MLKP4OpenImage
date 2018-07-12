@@ -85,7 +85,7 @@ class SolverWrapper(object):
         #        self.solver.net.params['cls_score'][1].data[:]=np.copy(vgg_net.params['cls_score'][1].data[:])
 
         with open(solver_prototxt, 'rt') as f:
-            pb2.text_format.Merge(f.read(), self.solver_param)
+            text_format.Merge(f.read(), self.solver_param)
 
         self.solver.net.layers[0].set_roidb(roidb)
 

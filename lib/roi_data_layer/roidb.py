@@ -158,8 +158,9 @@ def add_bbox_regression_targets(roidb):
 						else np.where(targets[:, 0] == cls)[0]
 					roidb[im_i]['bbox_targets'][cls_inds, 1:] -= means[cls, :]
 					roidb[im_i]['bbox_targets'][cls_inds, 1:] /= stds[cls, :]
-			with open(normalized_roidb_file, 'wb') as fid:
-				cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)	
+			if not os.path.exists(normalized_roidb_file):
+			    with open(normalized_roidb_file, 'wb') as fid:
+				    cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)	
         print "Done"
     else:
 		print "NOT normalizing targets"

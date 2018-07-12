@@ -7,3 +7,4 @@ faster_rcnn_model*
 *.txt
 ./lib/datasets/*.pyc
 data
+*.caffemodel
