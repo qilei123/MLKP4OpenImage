@@ -150,8 +150,7 @@ def _get_image_blob(roidb, scale_inds):
             processed_ims.append(im)
         except TypeError:
             print 'please check image:'+roidb[i]['image']
-        finally:
-            print 'go on'
+
 
     # Create a blob to hold the input images
     blob = im_list_to_blob(processed_ims)
