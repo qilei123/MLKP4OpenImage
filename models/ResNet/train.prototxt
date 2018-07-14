@@ -7685,7 +7685,7 @@ layer {
 layer {
 	name: "accuarcy"
 	type: "Accuracy"
-	bottom: "cls_score"
+	bottom: "cls_score1"
 	bottom: "labels"
 	top: "accuarcy"
 }
