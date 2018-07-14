@@ -42,7 +42,7 @@ __C.TRAIN.MAX_SIZE = 1000
 __C.TRAIN.MIN_SIZE = 600
 
 # Images to use per minibatch
-__C.TRAIN.IMS_PER_BATCH = 2
+__C.TRAIN.IMS_PER_BATCH = 1
 
 # Minibatch size (number of regions of interest [ROIs])
 __C.TRAIN.BATCH_SIZE = 64

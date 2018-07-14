@@ -102,9 +102,10 @@ if __name__ == '__main__':
     fbroidb = '/home/qileimail123/Development/openimagev4/CVDF/fbroidb.pkl'
     fbimdb = 'fbimdb.pkl'
     if os.path.exists(fbroidb):
-		with open(fbroidb,'rb') as fid:
-			roidb = cPickle.load(fid)
-		#with open(fbimdb,'rb') as fid:
+		#with open(fbroidb,'rb') as fid:
+		#	roidb = cPickle.load(fid)
+		roidb={}
+        #with open(fbimdb,'rb') as fid:
 		#	imdb = cPickle.load(fid)
 		output_dir = '/home/qileimail123/Development/openimagev4/CVDF/MLKP/resnetOutput'#get_output_dir(imdb)
     else:
