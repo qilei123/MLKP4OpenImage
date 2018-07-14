@@ -7617,10 +7617,10 @@ layer {
 }
 
 layer {
-  name: "cls_score1"
+  name: "cls_score"
   type: "InnerProduct"
   bottom: "pool5"
-  top: "cls_score1"
+  top: "cls_score"
   param {
     lr_mult: 1
   }
@@ -7628,7 +7628,7 @@ layer {
     lr_mult: 2
   }
   inner_product_param {
-    num_output: 600
+    num_output: 21
     weight_filler {
       type: "gaussian"
       std: 0.01
@@ -7640,10 +7640,10 @@ layer {
   }
 }
 layer {
-  name: "bbox_pred1"
+  name: "bbox_pred"
   type: "InnerProduct"
   bottom: "pool5"
-  top: "bbox_pred1"
+  top: "bbox_pred"
   param {
     lr_mult: 1
   }
@@ -7651,7 +7651,7 @@ layer {
     lr_mult: 2
   }
   inner_product_param {
-    num_output: 2400
+    num_output: 84
     weight_filler {
       type: "gaussian"
       std: 0.001
@@ -7665,7 +7665,7 @@ layer {
 layer {
   name: "loss_cls"
   type: "SoftmaxWithLoss"
-  bottom: "cls_score1"
+  bottom: "cls_score"
   bottom: "labels"
   propagate_down: 1
   propagate_down: 0
@@ -7675,7 +7675,7 @@ layer {
 layer {
   name: "loss_bbox"
   type: "SmoothL1Loss"
-  bottom: "bbox_pred1"
+  bottom: "bbox_pred"
   bottom: "bbox_targets"
   bottom: "bbox_inside_weights"
   bottom: "bbox_outside_weights"
@@ -7685,7 +7685,7 @@ layer {
 layer {
 	name: "accuarcy"
 	type: "Accuracy"
-	bottom: "cls_score1"
+	bottom: "cls_score"
 	bottom: "labels"
 	top: "accuarcy"
 }
