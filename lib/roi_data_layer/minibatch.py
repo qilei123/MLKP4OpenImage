@@ -139,14 +139,19 @@ def _get_image_blob(roidb, scale_inds):
     processed_ims = []
     im_scales = []
     for i in xrange(num_images):
-        im = cv2.imread(roidb[i]['image'])
-        if roidb[i]['flipped']:
-            im = im[:, ::-1, :]
-        target_size = cfg.TRAIN.SCALES[scale_inds[i]]
-        im, im_scale = prep_im_for_blob(im, cfg.PIXEL_MEANS, target_size,
-                                        cfg.TRAIN.MAX_SIZE)
-        im_scales.append(im_scale)
-        processed_ims.append(im)
+        try:
+            im = cv2.imread(roidb[i]['image'])
+            if roidb[i]['flipped']:
+                im = im[:, ::-1, :]
+            target_size = cfg.TRAIN.SCALES[scale_inds[i]]
+            im, im_scale = prep_im_for_blob(im, cfg.PIXEL_MEANS, target_size,
+                                            cfg.TRAIN.MAX_SIZE)
+            im_scales.append(im_scale)
+            processed_ims.append(im)
+        except TypeError:
+            print 'please check image:'+roidb[i]['image']
+        finally:
+            print 'go on'
 
     # Create a blob to hold the input images
     blob = im_list_to_blob(processed_ims)

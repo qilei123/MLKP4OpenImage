@@ -102,8 +102,9 @@ if __name__ == '__main__':
     fbroidb = 'fbroidb.pkl'
     fbimdb = 'fbimdb.pkl'
     if os.path.exists(fbroidb):
-		with open(fbroidb,'rb') as fid:
-			roidb = cPickle.load(fid)
+		#with open(fbroidb,'rb') as fid:
+		#	roidb = cPickle.load(fid)
+		roidb={}
 		#with open(fbimdb,'rb') as fid:
 		#	imdb = cPickle.load(fid)
 		output_dir = '/data0/qilei_chen/OpenImagesChallenge2018/MLKP4OpenImage/output/faster_rcnn_end2end/voc_2007_trainval'#get_output_dir(imdb)
