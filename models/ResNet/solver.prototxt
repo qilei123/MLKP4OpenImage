@@ -1,8 +1,8 @@
-train_net: "models/ResNettrain.prototxt"
+train_net: "models/ResNet/train.prototxt"
 base_lr: 0.001
 lr_policy: "step"
 gamma: 0.1
-stepsize: 3000000
+stepsize: 5000000
 display: 20
 average_loss: 1
 # iter_size: 1
