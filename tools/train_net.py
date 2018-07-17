@@ -19,6 +19,7 @@ import argparse
 import pprint
 import numpy as np
 import sys
+import cPickle
 
 def parse_args():
     """
@@ -101,10 +102,26 @@ if __name__ == '__main__':
     caffe.set_mode_gpu()
     caffe.set_device(args.gpu_id)
 
-    imdb, roidb = combined_roidb(args.imdb_name)
+    # set up caffe
+    fbroidb = '/home/qileimail123/cloudstorage/fbroidb.pkl'
+    fbimdb = 'fbimdb.pkl'
+    if os.path.exists(fbroidb):
+		#with open(fbroidb,'rb') as fid:
+		#	roidb = cPickle.load(fid)
+		roidb={}
+        #with open(fbimdb,'rb') as fid:
+		#	imdb = cPickle.load(fid)
+		output_dir = '/home/qileimail123/openimagev4/output/MLKP/resnetOutput'#get_output_dir(imdb)
+    else:
+        imdb, roidb = combined_roidb(args.imdb_name)
+        output_dir = get_output_dir(imdb)
+        #with open(fbimdb, 'wb') as fid:
+		#    cPickle.dump(imdb, fid, cPickle.HIGHEST_PROTOCOL)        
+        with open(fbroidb, 'wb') as fid:
+		    cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)
+        
     print '{:d} roidb entries'.format(len(roidb))
-
-    output_dir = get_output_dir(imdb)
+    
     print 'Output will be saved to `{:s}`'.format(output_dir)
 
     train_net(args.solver, roidb, output_dir,

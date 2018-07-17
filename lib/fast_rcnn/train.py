@@ -16,6 +16,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import os
+import cPickle
 
 from caffe.proto import caffe_pb2
 import google.protobuf.text_format
@@ -42,9 +43,24 @@ class SolverWrapper(object):
 
         if cfg.TRAIN.BBOX_REG:
             print 'Computing bounding-box regression targets...'
-            self.bbox_means, self.bbox_stds = \
-                    rdl_roidb.add_bbox_regression_targets(roidb)
-
+            means_file = 'means.npy'
+            stds_file = 'stds.npy'
+            froidb = 'froidb.pkl'
+            if os.path.exists(froidb):
+                means_array = np.load(means_file)
+                self.bbox_means = means_array.tolist()
+                stds_array = np.load(stds_file)
+                self.bbox_stds = stds_array.tolist()
+                with open(froidb,'rb') as fid:
+			        roidb = cPickle.load(fid)                
+            else:
+                self.bbox_means, self.bbox_stds = \
+                        rdl_roidb.add_bbox_regression_targets(roidb)
+                if not os.path.exists(froidb):
+                    with open(froidb, 'wb') as fid:
+		                cPickle.dump(roidb, fid, cPickle.HIGHEST_PROTOCOL)
+                np.save(means_file,self.bbox_means)
+                np.save(stds_file,self.bbox_stds)
             print 'done'
 
         self.solver = caffe.SGDSolver(solver_prototxt)
