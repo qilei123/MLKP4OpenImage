@@ -152,41 +152,41 @@ class SolverWrapper(object):
         net = self.solver.net
 
 
-        def gen_data(t=0):
-            rpn_loss_cls = 0
-            rpn_loss_bbox = 0
-            frcn_loss_cls = 0
-            frcn_loss_bbox = 0
-            accuarcy=0
-            while self.solver.iter < max_iters:
-                # Make one SGD update
-                t = self.solver.iter
+        #def gen_data(t=0):
+        rpn_loss_cls = 0
+        rpn_loss_bbox = 0
+        frcn_loss_cls = 0
+        frcn_loss_bbox = 0
+        accuarcy=0
+        while self.solver.iter < max_iters:
+            # Make one SGD update
+            t = self.solver.iter
 
-                timer.tic()
-                self.solver.step(1)
-                timer.toc()
-                rpn_loss_cls += net.blobs['rpn_cls_loss'].data
-                rpn_loss_bbox += net.blobs['rpn_loss_bbox'].data
-                frcn_loss_cls += net.blobs['loss_cls'].data
-                frcn_loss_bbox += net.blobs['loss_bbox'].data
-                accuarcy+=net.blobs['accuarcy'].data
-                if self.solver.iter % (10 * self.solver_param.display) == 0:
-                    print 'speed: {:.3f}s / iter'.format(timer.average_time)
+            timer.tic()
+            self.solver.step(1)
+            timer.toc()
+            rpn_loss_cls += net.blobs['rpn_cls_loss'].data
+            rpn_loss_bbox += net.blobs['rpn_loss_bbox'].data
+            frcn_loss_cls += net.blobs['loss_cls'].data
+            frcn_loss_bbox += net.blobs['loss_bbox'].data
+            accuarcy+=net.blobs['accuarcy'].data
+            if self.solver.iter % (10 * self.solver_param.display) == 0:
+                print 'speed: {:.3f}s / iter'.format(timer.average_time)
 
-                if self.solver.iter % cfg.TRAIN.SNAPSHOT_ITERS == 0:
-                    last_snapshot_iter = self.solver.iter
-                    model_paths.append(self.snapshot())
-                if self.solver.iter % cfg.TRAIN.DRAW_ITERS == 0:
-                    yield t, rpn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,rpn_loss_bbox  / cfg.TRAIN.DRAW_ITERS, frcn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,frcn_loss_bbox  / cfg.TRAIN.DRAW_ITERS,accuarcy / cfg.TRAIN.DRAW_ITERS
-                    rpn_loss_cls = 0
-                    rpn_loss_bbox = 0
-                    frcn_loss_cls = 0
-                    frcn_loss_bbox = 0
-                    accuarcy=0
+            if self.solver.iter % cfg.TRAIN.SNAPSHOT_ITERS == 0:
+                last_snapshot_iter = self.solver.iter
+                model_paths.append(self.snapshot())
+            if self.solver.iter % cfg.TRAIN.DRAW_ITERS == 0:
+                yield t, rpn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,rpn_loss_bbox  / cfg.TRAIN.DRAW_ITERS, frcn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,frcn_loss_bbox  / cfg.TRAIN.DRAW_ITERS,accuarcy / cfg.TRAIN.DRAW_ITERS
+                rpn_loss_cls = 0
+                rpn_loss_bbox = 0
+                frcn_loss_cls = 0
+                frcn_loss_bbox = 0
+                accuarcy=0
 		if self.solver.iter==max_iters:
 	            time.sleep(5)
-		    plt.close(fig)
-
+		    #plt.close(fig)
+        '''
         def init1():
             ax1.set_ylim(0,1)
             ax1.set_xlim(0,100)
@@ -262,6 +262,7 @@ class SolverWrapper(object):
         ani = animation.FuncAnimation(fig, run1, gen_data, blit=False, interval=10,
                                      repeat=False, init_func=init1)
         plt.show()
+        '''
         if last_snapshot_iter != self.solver.iter:
             model_paths.append(self.snapshot())
         return model_paths
