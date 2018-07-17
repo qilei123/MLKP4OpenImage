@@ -13,8 +13,8 @@ import roi_data_layer.roidb as rdl_roidb
 from utils.timer import Timer
 import time
 import numpy as np
-import matplotlib as mpl
-mpl.use('Agg')
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import os
