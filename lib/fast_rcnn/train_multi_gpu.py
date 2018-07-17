@@ -174,7 +174,7 @@ def solve(proto, roidb, pretrained_model, gpus, uid, rank, output_dir, max_iter)
 
     if solver.param.layer_wise_reduce:
         solver.net.after_backward(nccl)
-    net = self.solver.net
+    net = solver.net
     count = 0
     rpn_loss_cls = 0
     rpn_loss_bbox = 0
