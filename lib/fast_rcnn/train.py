@@ -18,7 +18,7 @@ import matplotlib.animation as animation
 import os
 import cPickle
 from caffe.proto import caffe_pb2
-import google.protobuf.text_format
+import google.protobuf.text_format as text_format
 import google.protobuf as pb2
 
 
