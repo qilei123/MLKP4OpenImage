@@ -1137,10 +1137,10 @@ layer {
   }
 }
 layer {
-  name: "cls_score"
+  name: "cls_score1"
   type: "InnerProduct"
   bottom: "fc7"
-  top: "cls_score"
+  top: "cls_score1"
   param {
     lr_mult: 1
   }
@@ -1185,7 +1185,7 @@ layer {
 layer {
   name: "loss_cls"
   type: "SoftmaxWithLoss"
-  bottom: "cls_score"
+  bottom: "cls_score1"
   bottom: "labels"
   top: "loss_cls"
   loss_weight: 1
@@ -1205,7 +1205,7 @@ layer {
 layer {
   name: "accuarcy"
   type: "Accuracy"
-  bottom: "cls_score"
+  bottom: "cls_score1"
   bottom: "labels"
   top: "accuarcy"
 }
