@@ -184,16 +184,17 @@ def solve(proto, roidb, pretrained_model, gpus, uid, rank, output_dir, max_iter)
     timer = Timer()
     while count < max_iter:
         timer.tic()
-        solver.step(cfg.TRAIN.SNAPSHOT_ITERS)
+        solver.step(cfg.TRAIN.SNAPSHOT_ITERS/100)
         timer.toc()
-        #rpn_loss_cls += net.blobs['rpn_cls_loss'].data
-        #rpn_loss_bbox += net.blobs['rpn_loss_bbox'].data
-        #frcn_loss_cls += net.blobs['loss_cls'].data
-        #frcn_loss_bbox += net.blobs['loss_bbox'].data
-        #accuarcy+=net.blobs['accuarcy'].data
-        #if solver.iter % (10 * self.solver_param.display) == 0:
-        #    print 'speed: {:.3f}s / iter'.format(timer.average_time)
-        if rank == 0:
+        rpn_loss_cls = net.blobs['rpn_cls_loss'].data
+        rpn_loss_bbox = net.blobs['rpn_loss_bbox'].data
+        frcn_loss_cls = net.blobs['loss_cls'].data
+        frcn_loss_bbox = net.blobs['loss_bbox'].data
+        accuarcy=net.blobs['accuarcy'].data
+        if solver.iter % (cfg.TRAIN.SNAPSHOT_ITERS/100) == 0:
+            print 'speed: {:.3f}s / iter'.format(timer.average_time/(cfg.TRAIN.SNAPSHOT_ITERS/100))
+            print 'rpn_loss_cls:'+str(rpn_loss_cls)+',rpn_loss_bbox:'+str(rpn_loss_bbox)+',frcn_loss_cls:'+str(frcn_loss_cls)+',frcn_loss_bbox:'+str(frcn_loss_bbox)+',accuarcy'+str(accuarcy)
+        if (rank == 0) and (solver.iter%cfg.TRAIN.SNAPSHOT_ITERS==0):
             solverW.snapshot()
         count = count + cfg.TRAIN.SNAPSHOT_ITERS
 
