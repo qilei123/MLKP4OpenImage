@@ -181,6 +181,7 @@ def solve(proto, roidb, pretrained_model, gpus, uid, rank, output_dir, max_iter)
     frcn_loss_cls = 0
     frcn_loss_bbox = 0
     accuarcy=0
+    timer = Timer()
     while count < max_iter:
         timer.tic()
         solver.step(cfg.TRAIN.SNAPSHOT_ITERS)
