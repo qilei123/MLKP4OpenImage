@@ -9,6 +9,7 @@ import caffe
 from fast_rcnn.config import cfg
 import roi_data_layer.roidb as rdl_roidb
 from utils.timer import Timer
+import time
 import numpy as np
 import os
 import cPickle
@@ -173,9 +174,24 @@ def solve(proto, roidb, pretrained_model, gpus, uid, rank, output_dir, max_iter)
 
     if solver.param.layer_wise_reduce:
         solver.net.after_backward(nccl)
+    net = self.solver.net
     count = 0
+    rpn_loss_cls = 0
+    rpn_loss_bbox = 0
+    frcn_loss_cls = 0
+    frcn_loss_bbox = 0
+    accuarcy=0
     while count < max_iter:
+        timer.tic()
         solver.step(cfg.TRAIN.SNAPSHOT_ITERS)
+        timer.toc()
+        rpn_loss_cls += net.blobs['rpn_cls_loss'].data
+        rpn_loss_bbox += net.blobs['rpn_loss_bbox'].data
+        frcn_loss_cls += net.blobs['loss_cls'].data
+        frcn_loss_bbox += net.blobs['loss_bbox'].data
+        accuarcy+=net.blobs['accuarcy'].data
+        if self.solver.iter % (10 * self.solver_param.display) == 0:
+            print 'speed: {:.3f}s / iter'.format(timer.average_time)
         if rank == 0:
             solverW.snapshot()
         count = count + cfg.TRAIN.SNAPSHOT_ITERS
