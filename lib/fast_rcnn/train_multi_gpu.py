@@ -185,13 +185,13 @@ def solve(proto, roidb, pretrained_model, gpus, uid, rank, output_dir, max_iter)
         timer.tic()
         solver.step(cfg.TRAIN.SNAPSHOT_ITERS)
         timer.toc()
-        rpn_loss_cls += net.blobs['rpn_cls_loss'].data
-        rpn_loss_bbox += net.blobs['rpn_loss_bbox'].data
-        frcn_loss_cls += net.blobs['loss_cls'].data
-        frcn_loss_bbox += net.blobs['loss_bbox'].data
-        accuarcy+=net.blobs['accuarcy'].data
-        if self.solver.iter % (10 * self.solver_param.display) == 0:
-            print 'speed: {:.3f}s / iter'.format(timer.average_time)
+        #rpn_loss_cls += net.blobs['rpn_cls_loss'].data
+        #rpn_loss_bbox += net.blobs['rpn_loss_bbox'].data
+        #frcn_loss_cls += net.blobs['loss_cls'].data
+        #frcn_loss_bbox += net.blobs['loss_bbox'].data
+        #accuarcy+=net.blobs['accuarcy'].data
+        #if solver.iter % (10 * self.solver_param.display) == 0:
+        #    print 'speed: {:.3f}s / iter'.format(timer.average_time)
         if rank == 0:
             solverW.snapshot()
         count = count + cfg.TRAIN.SNAPSHOT_ITERS
