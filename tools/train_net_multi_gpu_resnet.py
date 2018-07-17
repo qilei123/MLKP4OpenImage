@@ -99,7 +99,7 @@ if __name__ == '__main__':
         #caffe.set_random_seed(cfg.RNG_SEED)
 
     # set up caffe
-    fbroidb = '/home/qileimail123/Development/openimagev4/CVDF/fbroidb.pkl'
+    fbroidb = '/home/qileimail123/cloudstorage/fbroidb.pkl'
     fbimdb = 'fbimdb.pkl'
     if os.path.exists(fbroidb):
 		#with open(fbroidb,'rb') as fid:
