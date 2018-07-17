@@ -20,6 +20,7 @@ import pprint
 import numpy as np
 import sys
 import cPickle
+import os
 
 def parse_args():
     """
