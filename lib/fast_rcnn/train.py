@@ -177,7 +177,7 @@ class SolverWrapper(object):
                 last_snapshot_iter = self.solver.iter
                 model_paths.append(self.snapshot())
             if self.solver.iter % cfg.TRAIN.DRAW_ITERS == 0:
-                yield t, rpn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,rpn_loss_bbox  / cfg.TRAIN.DRAW_ITERS, frcn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,frcn_loss_bbox  / cfg.TRAIN.DRAW_ITERS,accuarcy / cfg.TRAIN.DRAW_ITERS
+                #yield t, rpn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,rpn_loss_bbox  / cfg.TRAIN.DRAW_ITERS, frcn_loss_cls  / cfg.TRAIN.DRAW_ITERS ,frcn_loss_bbox  / cfg.TRAIN.DRAW_ITERS,accuarcy / cfg.TRAIN.DRAW_ITERS
                 rpn_loss_cls = 0
                 rpn_loss_bbox = 0
                 frcn_loss_cls = 0
