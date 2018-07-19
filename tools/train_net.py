@@ -105,7 +105,7 @@ if __name__ == '__main__':
     caffe.set_device(args.gpu_id)
 
     # set up caffe
-    fbroidb = '10w_up_roidb.pkl'
+    fbroidb = '10w_up.pkl'
     fbimdb = 'fbimdb.pkl'
     if os.path.exists(fbroidb):
 		#with open(fbroidb,'rb') as fid:
