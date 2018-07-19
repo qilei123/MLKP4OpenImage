@@ -38,11 +38,12 @@ def get_minibatch(roidb, num_classes):
         gt_inds = np.where(roidb[0]['gt_classes'] != 0)[0]
         print gt_inds
         print roidb[0]['boxes']
+        t_boxes = tuple(roidb[0]['boxes'])
         gt_boxes = np.empty((len(gt_inds), 5), dtype=np.float32)
-        gt_boxes[:, 0] = roidb[0]['boxes'][gt_inds, 0] * im_scales[0][0]
-        gt_boxes[:, 2] = roidb[0]['boxes'][gt_inds, 2] * im_scales[0][0]
-        gt_boxes[:, 1] = roidb[0]['boxes'][gt_inds, 1] * im_scales[0][1]
-        gt_boxes[:, 3] = roidb[0]['boxes'][gt_inds, 3] * im_scales[0][1]
+        gt_boxes[:, 0] = t_boxes[gt_inds, 0] * im_scales[0][0]
+        gt_boxes[:, 2] = t_boxes[gt_inds, 2] * im_scales[0][0]
+        gt_boxes[:, 1] = t_boxes[gt_inds, 1] * im_scales[0][1]
+        gt_boxes[:, 3] = t_boxes[gt_inds, 3] * im_scales[0][1]
         gt_boxes[:, 4] = roidb[0]['gt_classes'][gt_inds]
         blobs['gt_boxes'] = gt_boxes
         blobs['im_info'] = np.array(
