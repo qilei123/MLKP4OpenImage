@@ -134,6 +134,7 @@ __C.TRAIN.RPN_POSITIVE_WEIGHT = -1.0
 # whether use class aware box or not
 __C.TRAIN.AGNOSTIC = False
 
+__C.TRAIN.CLASSES_NUM = 23
 #
 # Testing options
 #
