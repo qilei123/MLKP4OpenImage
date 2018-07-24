@@ -105,7 +105,7 @@ if __name__ == '__main__':
     caffe.set_device(args.gpu_id)
 
     # set up caffe
-    fbroidb = '10w_up.pkl'
+    fbroidb = cfg.TRAIN.FROIDB
     fbimdb = 'fbimdb.pkl'
     if os.path.exists(fbroidb):
 		#with open(fbroidb,'rb') as fid:
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 		roidb={}
         #with open(fbimdb,'rb') as fid:
 		#	imdb = cPickle.load(fid)
-		output_dir = '/home/qileimail123/openimagev4/output/MLKP/vgg16Output'#get_output_dir(imdb)
+		output_dir = cfg.TRAIN.OUTPUT_DIR#get_output_dir(imdb)
     else:
         imdb, roidb = combined_roidb(args.imdb_name)
         output_dir = get_output_dir(imdb)

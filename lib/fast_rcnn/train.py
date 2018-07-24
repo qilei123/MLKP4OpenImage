@@ -46,7 +46,7 @@ class SolverWrapper(object):
             print 'Computing bounding-box regression targets...'
             means_file = 'means.npy'
             stds_file = 'stds.npy'
-            froidb = '10w_up.pkl'
+            froidb = cfg.TRAIN.FROIDB
             if os.path.exists(froidb):
                 means_array = np.load(means_file)
                 temp_mean = means_array.tolist()

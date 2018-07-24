@@ -7,5 +7,8 @@ TRAIN:
   RPN_BATCHSIZE: 256
   PROPOSAL_METHOD: gt
   BG_THRESH_LO: 0.0
+  OUTPUT_DIR: '/home/qileimail123/openimagev4/output/MLKP/vgg16Output10w'
+  FROIDB: '10w_up.pkl'
+  SNAPSHOT_ITERS: 20
 TEST:
   HAS_RPN: True
