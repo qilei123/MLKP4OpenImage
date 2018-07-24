@@ -1,5 +1,5 @@
 train_net: "models/ResNet/train10w.prototxt"
-base_lr: 0.000001
+base_lr: 0.0001
 lr_policy: "step"
 gamma: 0.1
 stepsize: 5000
