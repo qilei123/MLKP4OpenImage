@@ -50,10 +50,10 @@ class SolverWrapper(object):
             if os.path.exists(froidb):
                 means_array = np.load(means_file)
                 temp_mean = means_array.tolist()
-                self.bbox_means = temp_mean[:4*(cfg.TRAIN.CLASSES_NUM+1)] 
+                self.bbox_means = np.array(temp_mean[:4*(cfg.TRAIN.CLASSES_NUM+1)])
                 stds_array = np.load(stds_file)
                 temp_std = stds_array.tolist()
-                self.bbox_stds = temp_std[:4*(cfg.TRAIN.CLASSES_NUM+1)]
+                self.bbox_stds = np.array(temp_std[:4*(cfg.TRAIN.CLASSES_NUM+1)])
                 with open(froidb,'rb') as fid:
 			        roidb = cPickle.load(fid)                
             else:
