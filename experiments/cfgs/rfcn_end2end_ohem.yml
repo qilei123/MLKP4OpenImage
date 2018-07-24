@@ -13,6 +13,8 @@ TRAIN:
   SNAPSHOT_ITERS: 5000
   RPN_PRE_NMS_TOP_N: 6000
   RPN_POST_NMS_TOP_N: 300
+  OUTPUT_DIR: '/home/qileimail123/openimagev4/output/MLKP/ResNet101Output10w'
+  FROIDB: '10w_up.pkl'
 TEST:
   HAS_RPN: True
   AGNOSTIC: True
