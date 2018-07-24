@@ -135,6 +135,10 @@ __C.TRAIN.RPN_POSITIVE_WEIGHT = -1.0
 __C.TRAIN.AGNOSTIC = False
 
 __C.TRAIN.CLASSES_NUM = 23
+
+__C.TRAIN.OUTPUT_DIR = 'default'
+__C.TRAIN.FROIDB = '*.pkl'
+
 #
 # Testing options
 #
