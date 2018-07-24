@@ -9,6 +9,6 @@ TRAIN:
   BG_THRESH_LO: 0.0
   OUTPUT_DIR: '/home/qileimail123/openimagev4/output/MLKP/vgg16Output10w'
   FROIDB: '10w_up.pkl'
-  SNAPSHOT_ITERS: 20
+  SNAPSHOT_ITERS: 5000
 TEST:
   HAS_RPN: True
