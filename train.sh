@@ -1,1 +1,1 @@
-python ./tools/train_net.py --gpu 1 --solver models/VGG16/solver.prototxt --weights /home/qilei123/openimagev4/output/MLKP/vgg16Output10w/vgg16_mlkp_iter_30000.caffemodel --imdb voc_2007_trainval --cfg experiments/cfgs/faster_rcnn_end2end.yml
+python ./tools/train_net.py --gpu 1 --solver models/VGG16/solver.prototxt --weights data/ImageNet_models/vgg16_mlkp_iter_30000.caffemodel --imdb voc_2007_trainval --cfg experiments/cfgs/faster_rcnn_end2end.yml
