@@ -1,0 +1,1 @@
+python ./tools/train_net.py --gpu 0 --solver models/VGG16/solver_changelayers.prototxt --weights data/ImageNet_models/vgg16_mlkp_iter_30000.caffemodel --imdb voc_2007_trainval --cfg experiments/cfgs/faster_rcnn_end2end.yml
