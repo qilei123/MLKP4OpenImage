@@ -7,5 +7,8 @@ TRAIN:
   RPN_BATCHSIZE: 128
   PROPOSAL_METHOD: gt
   BG_THRESH_LO: 0.1
+  OUTPUT_DIR: '/home/qileimail123/openimagev4/output/MLKP/ResNet101Output10w'
+  FROIDB: '10w_up.pkl'
+  SNAPSHOT_ITERS: 5000
 TEST:
   HAS_RPN: True
