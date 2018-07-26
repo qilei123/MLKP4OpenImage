@@ -7,7 +7,7 @@ display: 20
 average_loss: 1
 # iter_size: 1
 momentum: 0.9
-weight_decay: 0.00005
+weight_decay: 0.5
 # We disable standard caffe solver snapshotting and implement our own snapshot
 # function
 snapshot: 0
