@@ -113,7 +113,9 @@ if __name__ == '__main__':
 		roidb={}
         #with open(fbimdb,'rb') as fid:
 		#	imdb = cPickle.load(fid)
-		output_dir = '/home/qileimail123/openimagev4/output/MLKP/resnetOutput1'#get_output_dir(imdb)
+		output_dir = cfg.TRAIN.OUTPUT_DIR#get_output_dir(imdb)
+		if not os.path.isdir(output_dir):
+		    os.makedirs(output_dir)   
     else:
         imdb, roidb = combined_roidb(args.imdb_name)
         output_dir = get_output_dir(imdb)
